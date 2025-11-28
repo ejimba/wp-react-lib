@@ -1,23 +1,19 @@
-import React from 'react'
-import {AppContext} from './Context'
+import React, { Suspense, memo, useMemo } from 'react'
+import { AppContext } from './Context';
 
-class AppContextProvider extends React.Component {
-
-
-    componentDidMount() {
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-    }
-
-    render() {
-        const {locale, store, getComponent} = this.props
-
-        return (<AppContext.Provider value={{store, getComponent, locale}}>
-            {this.props.children}
-        </AppContext.Provider>);
-    }
-
+const AppContextProvider = ({ locale, store, getComponent, children }) => {
+    const memoizedValue = useMemo(() => ({
+        store: store,
+        getComponent: getComponent,
+        locale: locale
+    }), [store, getComponent, locale]);
+    return (
+        <AppContext.Provider value={memoizedValue}>
+            <Suspense>
+                {children}
+            </Suspense>
+        </AppContext.Provider>
+    );
 }
 
-export default AppContextProvider
+export default memo(AppContextProvider);

@@ -27,16 +27,23 @@ import PostLabel from "./template-parts/PostLabel";
 import PostTitle from "./template-parts/PostTitle";
 import PostIcon from "./template-parts/PostIcon";
 
+import SearchConsumer from "./consumers/SearchConsumer";
+import SearchProvider from "./providers/SearchProvider";
+
+
+import CategoriesProvider from "./providers/CategoriesProvider";
+import CategoriesConsumer from "./consumers/CategoriesConsumer";
 
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
+
+import { SettingsContext, PageContext, AppContext, PostContext, CategoriesContext, TaxonomyContext, SearchContext, MenuContext } from './providers/Context'
 
 export {
     Post,
     Page,
     Category,
     Taxonomy,
-
     PostProvider,
     PageProvider,
     MediaProvider,
@@ -50,15 +57,28 @@ export {
     MediaConsumer,
     TaxonomyConsumer,
     SettingsConsumer,
-    utils,
     wordpress,
+    utils,
     PostContent,
     PostDate,
     PostIntro,
     PostLabel,
     PostTitle,
-    PostIcon
-
+    PostIcon,
+    SearchConsumer,
+    SearchProvider,
+    SettingsContext,
+    PageContext,
+    AppContext,
+    PostContext,
+    CategoriesProvider,
+    CategoriesConsumer,
+    CategoriesContext,
+    TaxonomyContext,
+    SearchContext,
+    MenuContext
 }
 
-export default null;
+export * from './types';
+export * from './post-type';
+export * from './api';

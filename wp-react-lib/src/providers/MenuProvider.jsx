@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {connect} from 'react-redux'
 import {getMenu} from '../reducers/actions'
 import {MenuContext} from './Context'
@@ -16,6 +16,15 @@ class MenuProvider extends React.Component {
         if (slug) {
             this.props.onLoad({slug, locale})
         }
+    }
+
+    componentDidUpdate(prevProps){
+        const { slug} = this.props
+        const {onLoad, loading, locale} = this.props
+        if (prevProps.slug!=this.props.slug) {
+            this.props.onLoad({slug, locale})
+        }
+
     }
 
     render() {
@@ -39,7 +48,7 @@ const mapActionCreators = {
     onLoad: getMenu
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(MenuProvider));
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(memo(MenuProvider)));
 
 
 
